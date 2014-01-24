@@ -1,0 +1,9 @@
+c:\users\igor\documents\visual studio 2013\Projects\Markov_algorithm\Markov_algorithm\bin\Debug\Markov_algorithm.exe.config
+c:\users\igor\documents\visual studio 2013\Projects\Markov_algorithm\Markov_algorithm\bin\Debug\Markov_algorithm.exe
+c:\users\igor\documents\visual studio 2013\Projects\Markov_algorithm\Markov_algorithm\bin\Debug\Markov_algorithm.pdb
+c:\users\igor\documents\visual studio 2013\Projects\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.csprojResolveAssemblyReference.cache
+c:\users\igor\documents\visual studio 2013\Projects\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.Form1.resources
+c:\users\igor\documents\visual studio 2013\Projects\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.Properties.Resources.resources
+c:\users\igor\documents\visual studio 2013\Projects\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.csproj.GenerateResource.Cache
+c:\users\igor\documents\visual studio 2013\Projects\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.exe
+c:\users\igor\documents\visual studio 2013\Projects\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.pdb
