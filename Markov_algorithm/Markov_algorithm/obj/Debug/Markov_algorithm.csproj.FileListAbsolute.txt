@@ -7,3 +7,12 @@ c:\users\igor\documents\visual studio 2013\Projects\Markov_algorithm\Markov_algo
 c:\users\igor\documents\visual studio 2013\Projects\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.csproj.GenerateResource.Cache
 c:\users\igor\documents\visual studio 2013\Projects\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.exe
 c:\users\igor\documents\visual studio 2013\Projects\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.pdb
+D:\Mohyla\Испытание Фандорина\Markov\Markov_algorithm\Markov_algorithm\bin\Debug\Markov_algorithm.exe.config
+D:\Mohyla\Испытание Фандорина\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.exe
+D:\Mohyla\Испытание Фандорина\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.pdb
+D:\Mohyla\Испытание Фандорина\Markov\Markov_algorithm\Markov_algorithm\bin\Debug\Markov_algorithm.exe
+D:\Mohyla\Испытание Фандорина\Markov\Markov_algorithm\Markov_algorithm\bin\Debug\Markov_algorithm.pdb
+D:\Mohyla\Испытание Фандорина\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.csprojResolveAssemblyReference.cache
+D:\Mohyla\Испытание Фандорина\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.Form1.resources
+D:\Mohyla\Испытание Фандорина\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.Properties.Resources.resources
+D:\Mohyla\Испытание Фандорина\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.csproj.GenerateResource.Cache
