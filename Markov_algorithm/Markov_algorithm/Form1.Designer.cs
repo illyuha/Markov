@@ -2,7 +2,7 @@
 
 namespace Markov_algorithm
 {
-    partial class Form1
+    partial class MarkovForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,9 +30,10 @@ namespace Markov_algorithm
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MarkovForm));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -64,14 +65,14 @@ namespace Markov_algorithm
             this.inputTextBox = new System.Windows.Forms.TextBox();
             this.outputTextBox = new System.Windows.Forms.TextBox();
             this.outputLbl = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.programGrid = new System.Windows.Forms.DataGridView();
             this.Number = new System.Windows.Forms.DataGridViewButtonColumn();
             this.LeftStr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Arrow = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.RightStr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MainMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.programGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // MainMenuStrip
@@ -317,52 +318,68 @@ namespace Markov_algorithm
             this.outputLbl.TabIndex = 6;
             this.outputLbl.Text = "Output string:";
             // 
-            // dataGridView1
+            // programGrid
             // 
-            this.dataGridView1.AllowUserToResizeColumns = false;
-            this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.programGrid.AllowUserToResizeColumns = false;
+            this.programGrid.AllowUserToResizeRows = false;
+            this.programGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.programGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.programGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.programGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.programGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.programGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Number,
             this.LeftStr,
             this.Arrow,
             this.RightStr});
-            this.dataGridView1.Location = new System.Drawing.Point(11, 215);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridView1.Size = new System.Drawing.Size(309, 135);
-            this.dataGridView1.TabIndex = 8;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.programGrid.DefaultCellStyle = dataGridViewCellStyle5;
+            this.programGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.programGrid.EnableHeadersVisualStyles = false;
+            this.programGrid.GridColor = System.Drawing.SystemColors.ActiveBorder;
+            this.programGrid.Location = new System.Drawing.Point(11, 215);
+            this.programGrid.MultiSelect = false;
+            this.programGrid.Name = "programGrid";
+            this.programGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.programGrid.RowHeadersVisible = false;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.programGrid.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.programGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.programGrid.Size = new System.Drawing.Size(309, 135);
+            this.programGrid.TabIndex = 0;
+            this.programGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.programGrid_RowsAdded);
+            this.programGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.programGrid_KeyDown);
             // 
             // Number
             // 
+            this.Number.Frozen = true;
             this.Number.HeaderText = "Number";
             this.Number.Name = "Number";
             this.Number.ReadOnly = true;
             this.Number.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Number.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Number.UseColumnTextForButtonValue = true;
             this.Number.Width = 50;
             // 
             // LeftStr
             // 
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.LeftStr.DefaultCellStyle = dataGridViewCellStyle2;
             this.LeftStr.HeaderText = "Left string";
@@ -393,12 +410,12 @@ namespace Markov_algorithm
             this.RightStr.Name = "RightStr";
             this.RightStr.Width = 92;
             // 
-            // Form1
+            // MarkovForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(332, 362);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.programGrid);
             this.Controls.Add(this.outputTextBox);
             this.Controls.Add(this.outputLbl);
             this.Controls.Add(this.inputTextBox);
@@ -407,13 +424,13 @@ namespace Markov_algorithm
             this.Controls.Add(this.statementTextBox);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.MainMenuStrip);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "MarkovForm";
+            this.Text = "Markov algorithms";
             this.MainMenuStrip.ResumeLayout(false);
             this.MainMenuStrip.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.programGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -449,7 +466,7 @@ namespace Markov_algorithm
         private System.Windows.Forms.TextBox inputTextBox;
         private System.Windows.Forms.TextBox outputTextBox;
         private System.Windows.Forms.Label outputLbl;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView programGrid;
         private System.Windows.Forms.DataGridViewButtonColumn Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn LeftStr;
         private System.Windows.Forms.DataGridViewComboBoxColumn Arrow;
