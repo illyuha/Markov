@@ -30,13 +30,14 @@ namespace Markov_algorithm
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MarkovForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.MainMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,9 +57,9 @@ namespace Markov_algorithm
             this.OpenButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.runButton = new System.Windows.Forms.ToolStripButton();
+            this.debugButton = new System.Windows.Forms.ToolStripButton();
+            this.StopButton = new System.Windows.Forms.ToolStripButton();
             this.statementTextBox = new System.Windows.Forms.TextBox();
             this.statementLbl = new System.Windows.Forms.Label();
             this.inputLbl = new System.Windows.Forms.Label();
@@ -70,9 +71,15 @@ namespace Markov_algorithm
             this.LeftStr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Arrow = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.RightStr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.programMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.insertRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenuStrip.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.programGrid)).BeginInit();
+            this.programMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // MainMenuStrip
@@ -200,9 +207,9 @@ namespace Markov_algorithm
             this.OpenButton,
             this.toolStripButton3,
             this.toolStripSeparator2,
-            this.toolStripButton4,
-            this.toolStripButton5,
-            this.toolStripButton6});
+            this.runButton,
+            this.debugButton,
+            this.StopButton});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(332, 25);
@@ -216,7 +223,7 @@ namespace Markov_algorithm
             this.NewButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.NewButton.Name = "NewButton";
             this.NewButton.Size = new System.Drawing.Size(23, 22);
-            this.NewButton.Text = "toolStripButton1";
+            this.NewButton.Text = "New (Ctrl+N)";
             this.NewButton.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // OpenButton
@@ -225,7 +232,7 @@ namespace Markov_algorithm
             this.OpenButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.OpenButton.Name = "OpenButton";
             this.OpenButton.Size = new System.Drawing.Size(23, 22);
-            this.OpenButton.Text = "toolStripButton2";
+            this.OpenButton.Text = "Open (Ctrl+O)";
             // 
             // toolStripButton3
             // 
@@ -234,39 +241,41 @@ namespace Markov_algorithm
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton3.Text = "toolStripButton3";
+            this.toolStripButton3.Text = "Save (Ctrl+S)";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripButton4
+            // runButton
             // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton4.Text = "toolStripButton4";
+            this.runButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.runButton.Image = ((System.Drawing.Image)(resources.GetObject("runButton.Image")));
+            this.runButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.runButton.Name = "runButton";
+            this.runButton.Size = new System.Drawing.Size(23, 22);
+            this.runButton.Text = "toolStripButton4";
+            this.runButton.ToolTipText = "Run (Ctrl+F5)";
+            this.runButton.Click += new System.EventHandler(this.runButton_Click);
             // 
-            // toolStripButton5
+            // debugButton
             // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton5.Text = "toolStripButton5";
+            this.debugButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.debugButton.Image = ((System.Drawing.Image)(resources.GetObject("debugButton.Image")));
+            this.debugButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.debugButton.Name = "debugButton";
+            this.debugButton.Size = new System.Drawing.Size(23, 22);
+            this.debugButton.Text = "Debug (F5)";
             // 
-            // toolStripButton6
+            // StopButton
             // 
-            this.toolStripButton6.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton6.Text = "toolStripButton6";
+            this.StopButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.StopButton.Image = ((System.Drawing.Image)(resources.GetObject("StopButton.Image")));
+            this.StopButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.StopButton.Name = "StopButton";
+            this.StopButton.Size = new System.Drawing.Size(23, 22);
+            this.StopButton.Text = "Stop (Shift+F5)";
             // 
             // statementTextBox
             // 
@@ -327,28 +336,28 @@ namespace Markov_algorithm
             | System.Windows.Forms.AnchorStyles.Right)));
             this.programGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.programGrid.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.programGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.programGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.programGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.programGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Number,
             this.LeftStr,
             this.Arrow,
             this.RightStr});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.programGrid.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.ControlLightLight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.programGrid.DefaultCellStyle = dataGridViewCellStyle11;
             this.programGrid.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.programGrid.EnableHeadersVisualStyles = false;
             this.programGrid.GridColor = System.Drawing.SystemColors.ActiveBorder;
@@ -357,14 +366,16 @@ namespace Markov_algorithm
             this.programGrid.Name = "programGrid";
             this.programGrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.programGrid.RowHeadersVisible = false;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.programGrid.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.programGrid.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.programGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.programGrid.Size = new System.Drawing.Size(309, 135);
             this.programGrid.TabIndex = 0;
             this.programGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.programGrid_RowsAdded);
+            this.programGrid.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.programGrid_RowsRemoved);
             this.programGrid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.programGrid_KeyDown);
+            this.programGrid.MouseDown += new System.Windows.Forms.MouseEventHandler(this.programGrid_MouseDown);
             // 
             // Number
             // 
@@ -378,10 +389,10 @@ namespace Markov_algorithm
             // 
             // LeftStr
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LeftStr.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.LeftStr.DefaultCellStyle = dataGridViewCellStyle8;
             this.LeftStr.HeaderText = "Left string";
             this.LeftStr.MaxInputLength = 10;
             this.LeftStr.Name = "LeftStr";
@@ -389,9 +400,9 @@ namespace Markov_algorithm
             // 
             // Arrow
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Arrow.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Arrow.DefaultCellStyle = dataGridViewCellStyle9;
             this.Arrow.HeaderText = "Arrow";
             this.Arrow.Items.AddRange(new object[] {
             "→",
@@ -403,12 +414,50 @@ namespace Markov_algorithm
             // 
             // RightStr
             // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.RightStr.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.RightStr.DefaultCellStyle = dataGridViewCellStyle10;
             this.RightStr.HeaderText = "Right string";
             this.RightStr.Name = "RightStr";
             this.RightStr.Width = 92;
+            // 
+            // programMenuStrip
+            // 
+            this.programMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.insertRowToolStripMenuItem,
+            this.deleteRowToolStripMenuItem,
+            this.addRowToolStripMenuItem,
+            this.clearRowToolStripMenuItem});
+            this.programMenuStrip.Name = "programMenuStrip";
+            this.programMenuStrip.Size = new System.Drawing.Size(131, 92);
+            // 
+            // insertRowToolStripMenuItem
+            // 
+            this.insertRowToolStripMenuItem.Name = "insertRowToolStripMenuItem";
+            this.insertRowToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.insertRowToolStripMenuItem.Text = "Insert row";
+            this.insertRowToolStripMenuItem.Click += new System.EventHandler(this.insertRowToolStripMenuItem_Click);
+            // 
+            // deleteRowToolStripMenuItem
+            // 
+            this.deleteRowToolStripMenuItem.Name = "deleteRowToolStripMenuItem";
+            this.deleteRowToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.deleteRowToolStripMenuItem.Text = "Delete row";
+            this.deleteRowToolStripMenuItem.Click += new System.EventHandler(this.deleteRowToolStripMenuItem_Click);
+            // 
+            // addRowToolStripMenuItem
+            // 
+            this.addRowToolStripMenuItem.Name = "addRowToolStripMenuItem";
+            this.addRowToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.addRowToolStripMenuItem.Text = "Add row";
+            this.addRowToolStripMenuItem.Click += new System.EventHandler(this.addRowToolStripMenuItem_Click);
+            // 
+            // clearRowToolStripMenuItem
+            // 
+            this.clearRowToolStripMenuItem.Name = "clearRowToolStripMenuItem";
+            this.clearRowToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.clearRowToolStripMenuItem.Text = "Clear row";
+            this.clearRowToolStripMenuItem.Click += new System.EventHandler(this.clearRowToolStripMenuItem_Click);
             // 
             // MarkovForm
             // 
@@ -431,6 +480,7 @@ namespace Markov_algorithm
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.programGrid)).EndInit();
+            this.programMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -456,9 +506,9 @@ namespace Markov_algorithm
         private System.Windows.Forms.ToolStripButton OpenButton;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
+        private System.Windows.Forms.ToolStripButton runButton;
+        private System.Windows.Forms.ToolStripButton debugButton;
+        private System.Windows.Forms.ToolStripButton StopButton;
         private System.Windows.Forms.ToolStripMenuItem aboutMAToolStripMenuItem;
         private System.Windows.Forms.TextBox statementTextBox;
         private System.Windows.Forms.Label statementLbl;
@@ -471,6 +521,11 @@ namespace Markov_algorithm
         private System.Windows.Forms.DataGridViewTextBoxColumn LeftStr;
         private System.Windows.Forms.DataGridViewComboBoxColumn Arrow;
         private System.Windows.Forms.DataGridViewTextBoxColumn RightStr;
+        private System.Windows.Forms.ContextMenuStrip programMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem insertRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addRowToolStripMenuItem;
     }
 }
 
