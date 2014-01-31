@@ -16,3 +16,12 @@ D:\Mohyla\Испытание Фандорина\Markov\Markov_algorithm\Markov_a
 D:\Mohyla\Испытание Фандорина\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.Properties.Resources.resources
 D:\Mohyla\Испытание Фандорина\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.csproj.GenerateResource.Cache
 D:\Mohyla\Испытание Фандорина\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.MarkovForm.resources
+D:\Mohyla\IV\Project Management\Project\Markov\Markov_algorithm\Markov_algorithm\bin\Debug\Markov_algorithm.exe.config
+D:\Mohyla\IV\Project Management\Project\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.exe
+D:\Mohyla\IV\Project Management\Project\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.pdb
+D:\Mohyla\IV\Project Management\Project\Markov\Markov_algorithm\Markov_algorithm\bin\Debug\Markov_algorithm.exe
+D:\Mohyla\IV\Project Management\Project\Markov\Markov_algorithm\Markov_algorithm\bin\Debug\Markov_algorithm.pdb
+D:\Mohyla\IV\Project Management\Project\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.csprojResolveAssemblyReference.cache
+D:\Mohyla\IV\Project Management\Project\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.MarkovForm.resources
+D:\Mohyla\IV\Project Management\Project\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.Properties.Resources.resources
+D:\Mohyla\IV\Project Management\Project\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.csproj.GenerateResource.Cache

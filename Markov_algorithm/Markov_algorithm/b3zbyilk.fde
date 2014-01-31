@@ -20,20 +20,18 @@ namespace Markov_algorithm
         private const string finishArrow = "↦";
         private bool debugModeOn = false;
         private int debugCurrentCommand = 0;
-        private bool onSubstitute = false;
 
         private void runProgram()
         {
             programGrid.CurrentCell = null;
             if (compileProgram() == 0)
             {
-                StopButton.Enabled = true;
-                outputRichTextBox.Text = inputTextBox.Text;
+                outputTextBox.Text = inputTextBox.Text;
                 freezeFields();
                 int steps = 0;
                 while (steps < stepsLimit)
                 {
-                    String curString = outputRichTextBox.Text;
+                    String curString = outputTextBox.Text;
                     bool finish = true;
                     for (int command = 0; command < commandsCount; command++ )
                     {
@@ -51,19 +49,22 @@ namespace Markov_algorithm
                             if (s == ordinaryArrow)
                                 finish = false;
                             break;
-                        }
+                        }   
                     }
-                    outputRichTextBox.Text = curString;
+                    outputTextBox.Text = curString;
                     if (finish) break;
                     ++steps;
                 }
                 if (steps == stepsLimit)
                 {
                     MessageBox.Show("Commands limit reached (possibly endless program");
-                    outputRichTextBox.Text = "";
+                    outputTextBox.Text = "";
                 }
                 unfreezeFields();
-                StopButton.Enabled = false;
+            }
+            else
+            {
+                // TODO
             }
         }
 
@@ -131,59 +132,42 @@ namespace Markov_algorithm
         private void debugProgram()
         {
             if (!debugModeOn)
-            {
                 if (compileProgram() == 0)
                 {
                     debugModeOn = true;
-                    outputRichTextBox.Text = inputTextBox.Text;
+                    outputTextBox.Text = inputTextBox.Text;
                     runButton.Enabled = false;
-                    StopButton.Enabled = true;
-                    freezeFields();
                 }
-            }
-            else
+            if (debugModeOn)
             {
-                if (debugCurrentCommand + 1 == programGrid.Rows.Count)
-                    stopProgram();
+                freezeFields();
+                String curString = outputTextBox.Text;
+                object lv = programGrid[1, debugCurrentCommand].Value;
+                String left = (lv == null ? "" : lv.ToString());
+                int ind = curString.IndexOf(left);
+                if (ind >= 0)
+                {
+                    DataGridViewComboBoxCell arrow = (DataGridViewComboBoxCell)programGrid[2, debugCurrentCommand];
+                    String s = arrow.Value.ToString();
+                    object rv = programGrid[3, debugCurrentCommand].Value;
+                    String right = (rv == null ? "" : rv.ToString());
+                    curString = curString.Remove(ind, left.Length);
+                    curString = curString.Insert(ind, right);
+                    debugCurrentCommand = 0;
+                    if (s == finishArrow)
+                    {
+                        stopProgram();
+                    }
+                }
                 else
                 {
-                    if (debugCurrentCommand > 0)
-                        programGrid.Rows[debugCurrentCommand - 1].DefaultCellStyle.BackColor = Color.White;
-                    programGrid.Rows[debugCurrentCommand].DefaultCellStyle.BackColor = Color.Yellow;
-                    String curString = outputRichTextBox.Text;
-                    object lv = programGrid[1, debugCurrentCommand].Value;
-                    String left = (lv == null ? "" : lv.ToString());
-                    int ind = curString.IndexOf(left);
-                    if (ind >= 0)
+                    ++debugCurrentCommand;
+                    if (debugCurrentCommand + 1 == programGrid.Rows.Count)
                     {
-                        if (!onSubstitute)
-                        {
-                            onSubstitute = true;
-                            outputRichTextBox.SelectionStart = ind;
-                            outputRichTextBox.SelectionLength = left.Length;
-                            outputRichTextBox.SelectionColor = Color.Yellow;
-                            programGrid.Rows[debugCurrentCommand].DefaultCellStyle.BackColor = Color.Yellow;
-                        }
-                        else
-                        {
-                            outputRichTextBox.SelectionColor = Color.Black;
-                            DataGridViewComboBoxCell arrow = (DataGridViewComboBoxCell)programGrid[2, debugCurrentCommand];
-                            String s = arrow.Value.ToString();
-                            object rv = programGrid[3, debugCurrentCommand].Value;
-                            String right = (rv == null ? "" : rv.ToString());
-                            curString = curString.Remove(ind, left.Length);
-                            curString = curString.Insert(ind, right);
-                            programGrid.Rows[debugCurrentCommand].DefaultCellStyle.BackColor = Color.White;
-                            debugCurrentCommand = 0;
-                            onSubstitute = false;
-                            outputRichTextBox.Text = curString;
-                            if (s == finishArrow)
-                                stopProgram();
-                        }
+                        stopProgram();
                     }
-                    else
-                        ++debugCurrentCommand;
                 }
+                outputTextBox.Text = curString;
             }
         }
 
@@ -192,11 +176,6 @@ namespace Markov_algorithm
             debugModeOn = false;
             debugCurrentCommand = 0;
             unfreezeFields();
-            runButton.Enabled = true;
-            StopButton.Enabled = false;
-            for (int i = 0; i < programGrid.Rows.Count; ++i)
-                programGrid.Rows[i].DefaultCellStyle.BackColor = Color.White;
-            outputRichTextBox.SelectionColor = Color.Black;
         }
     }
 }

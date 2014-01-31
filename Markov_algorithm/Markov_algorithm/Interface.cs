@@ -121,5 +121,26 @@ namespace Markov_algorithm
             runProgram();
         }
 
+        private void debugButton_Click(object sender, EventArgs e)
+        {
+            debugProgram();
+        }
+
+        private void StopButton_Click(object sender, EventArgs e)
+        {
+            stopProgram();
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == (Keys.Control | Keys.F5) && runButton.Enabled)
+                runProgram();
+            else if (keyData == (Keys.Shift | Keys.F5) && StopButton.Enabled)
+                stopProgram();
+            else if (keyData == (Keys.F5) && debugButton.Enabled)
+                debugProgram();
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
     }
 }
