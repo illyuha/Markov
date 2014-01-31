@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Markov_algorithm
 {
@@ -21,21 +22,6 @@ namespace Markov_algorithm
             InitializeComponent();
             for (int i = 0; i < rowsByDefault - 1; i++)
                 this.addRow();
-        }
-
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void addRow()
@@ -119,6 +105,38 @@ namespace Markov_algorithm
         private void runButton_Click(object sender, EventArgs e)
         {
             runProgram();
+        }
+
+        private void saveButton_Click(object sender, EventArgs e)
+        {
+            StreamWriter ofs;
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Markov algorithm programs (*.nam)|*.nam";
+            saveDialog.RestoreDirectory = true;
+            if (saveDialog.ShowDialog() == DialogResult.OK)
+            {
+                ofs = new StreamWriter(saveDialog.OpenFile());
+                try
+                {
+                    calculateRowsCount();
+                    ofs.WriteLine(totalRowsCount);
+                    for (int i = 0; i < totalRowsCount; i++ )
+                    {
+                        ofs.Write(programGrid[1, i].Value + " ");
+                        ofs.Write(arrowIndex(i) + " ");
+                        ofs.Write(programGrid[3, i].Value + "\n");
+                    }
+                    ofs.WriteLine(statementTextBox.Text);
+                }
+                catch (IOException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    ofs.Close();
+                }
+            }
         }
 
     }

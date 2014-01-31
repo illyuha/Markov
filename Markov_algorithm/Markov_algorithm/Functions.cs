@@ -13,7 +13,7 @@ namespace Markov_algorithm
 {
     public partial class MarkovForm : Form
     {
-        private int commandsCount;
+        private int commandsCount, totalRowsCount;
         private string[] messages = { "left string", "arrow", "right string" };
         private const int stepsLimit = 1000;
         private const string ordinaryArrow = "→";
@@ -119,6 +119,29 @@ namespace Markov_algorithm
             inputTextBox.ReadOnly = state;
             outputTextBox.ReadOnly = state;
             programGrid.ReadOnly = state;
+        }
+
+        private void calculateRowsCount()
+        {
+            totalRowsCount = 0;
+            for (int i = 0; i < programGrid.Rows.Count; i++)
+                if (!isBlancRow(i))
+                    totalRowsCount = i + 1;  
+        }
+
+        private int arrowIndex(int rowIndex)
+        {
+            DataGridViewComboBoxCell arrow = (DataGridViewComboBoxCell)programGrid[2, rowIndex];
+            if (arrow.Value == null)
+                return 0;
+            else
+            {
+                String s = arrow.Value.ToString();
+                if (s == ordinaryArrow)
+                    return 1;
+                else
+                    return 2;
+            }
         }
     }
 }
