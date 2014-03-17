@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.IO;
 
 namespace Markov_algorithm
 {
@@ -221,5 +221,219 @@ namespace Markov_algorithm
                 programGrid.Rows[i].DefaultCellStyle.BackColor = Color.White;
             outputRichTextBox.SelectionColor = Color.Black;
         }
+
+        private void writeToFile(StreamWriter ofs)
+        {
+            calculateRowsCount();
+            ofs.WriteLine(totalRowsCount);
+            for (int i = 0; i < totalRowsCount; i++)
+            {
+                ofs.Write(programGrid[1, i].Value + " ");
+                ofs.Write(arrowIndex(i) + " ");
+                ofs.Write(programGrid[3, i].Value + "\r\n");
+            }
+            ofs.WriteLine(statementTextBox.Text);
+        }
+        
+        private void saveFile()
+        {
+            StreamWriter ofs = new StreamWriter(currentFileName);//(saveDialog.OpenFile());
+            try
+            {
+                writeToFile(ofs);
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                ofs.Close();
+                setGridModified(false);
+            }
+        }
+
+        private void saveFileAs()
+        {
+            //if (compileProgram() == 0)
+            {
+                SaveFileDialog saveDialog = new SaveFileDialog();
+                saveDialog.Filter = "Markov algorithm programs (*.nam)|*.nam";
+                saveDialog.RestoreDirectory = true;
+                if (saveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    StreamWriter ofs = new StreamWriter(saveDialog.OpenFile());
+                    try
+                    {
+                        writeToFile(ofs);
+                    }
+                    catch (IOException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    finally
+                    {
+                        ofs.Close();
+                        Text = Path.GetFileName(saveDialog.FileName);
+                        currentFileName = saveDialog.FileName;
+                        setGridModified(false);
+                    }
+                }
+            }
+        }
+
+        private void saveProgram()
+        {
+            if (currentFileName.Length == 0)
+                saveFileAs();
+            else
+                saveFile();
+        }
+
+        private void openProgram()
+        {
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Filter = "Markov algorithm programs (*.nam)|*.nam";
+            bool readingSuccessful = true;
+            uint commandsNum = 0;
+            string[,] commands = null;
+            string message = "Unknown error =(";
+            string fileName = null;
+            string problemStatement = "";
+            if (openDialog.ShowDialog() == DialogResult.OK)
+            {
+                fileName = openDialog.FileName;
+                try
+                {
+                    string text = File.ReadAllText(fileName);
+                    string[] lines = text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                    if (uint.TryParse(lines[0], out commandsNum))
+                    {
+                        if (lines.Length >= commandsNum)
+                        {
+                            commands = new string[commandsNum, 3];
+                            for (uint line = 0; line < commandsNum && readingSuccessful; ++line)
+                            {
+                                string[] parts = lines[line + 1].Split();
+                                if (parts.Length == 3)
+                                {
+                                    commands[line, 0] = parts[0];
+                                    commands[line, 2] = parts[2];
+                                    uint rowType;
+                                    if (uint.TryParse(parts[1], out rowType))
+                                    {
+                                        if (rowType == 1)
+                                            commands[line, 1] = ordinaryArrow;
+                                        else if (rowType == 2)
+                                            commands[line, 1] = finishArrow;
+                                        else if (rowType == 0)
+                                            commands[line, 1] = "";
+                                        else
+                                        {
+                                            readingSuccessful = false;
+                                            message = string.Format("Failed to read the type of arrow in row {0};\nshould be either 1 or 2", line + 1);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        readingSuccessful = false;
+                                        message = string.Format("Failed to read the type of arrow in row {0};\nshould be either 1 or 2", line + 1);
+                                    }
+                                }
+                                else if (parts.Length == 2)
+                                {
+                                    // TODO
+                                }
+                                else if (parts.Length == 1)
+                                {
+                                    // TODO
+                                }
+                                else
+                                {
+                                    readingSuccessful = false;
+                                    message = string.Format("Failed to read command in row {0}", line + 1);
+                                }
+                            }
+                            if (readingSuccessful)
+                            {
+                                if (lines.Length > commandsNum + 1)
+                                {
+                                    problemStatement = lines[commandsNum + 1];
+                                }
+                            }
+                        }
+                        else
+                        {
+                            readingSuccessful = false;
+                            message = string.Format("Too few commands in the file (expected - {0})", commandsNum);
+                        }
+                    }
+                    else
+                    {
+                        readingSuccessful = false;
+                        message = "Failed to read the number of commands";
+                    }
+                }
+                catch (IOException)
+                {
+                    readingSuccessful = false;
+                    message = "Failed to open file";
+                }
+            }
+            //else
+            //{
+            //    readingSuccessful = false;
+            //    message = "Failed to open dialog";
+            //}
+            if (readingSuccessful)
+            {
+                programGrid.Rows.Clear();
+                for (int row = 0; row < commandsNum; ++row)
+                {
+                    addRow();
+                    for (int col = 1; col <= 3; ++col)
+                        programGrid[col, row].Value = commands[row, col - 1];
+                }
+                /*while (programGrid.RowCount < 5)
+                    addRow();*/
+                Text = Path.GetFileName(fileName);
+                currentFileName = fileName;
+                statementTextBox.Text = problemStatement;
+                setGridModified(false);
+            }
+            else
+                MessageBox.Show(message, "Parsing file failed", MessageBoxButtons.OK);
+        }
+
+        private void createNewFile()
+        {
+            Text = defaultWindowText;
+            statementTextBox.Text = "";
+            setGridModified(false);
+            programGrid.Rows.Clear();
+            for (int i = 0; i < 4; ++i)
+                addRow();
+            currentFileName = "";
+        }
+
+        private void createNewProgram()
+        {
+            if (fileModified)
+            {
+                var response = MessageBox.Show("Would you like to save changes?", "Warning", MessageBoxButtons.YesNoCancel);
+                if (response == DialogResult.Yes)
+                {
+                    saveProgram();
+                    createNewFile();
+                }
+                else if (response == DialogResult.No)
+                    createNewFile();
+            }
+            else
+                createNewFile();
+        }
+
+
+
     }
 }

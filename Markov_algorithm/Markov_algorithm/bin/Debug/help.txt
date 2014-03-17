@@ -1,0 +1,34 @@
+This application is an emulator of Markov algorithms.
+
+Formally, Markov algorithm(MA) (or Normal Markov algorithm) is a finite ordered set of substitution formulae: s1 -> s2, where s1 is the string to be substituted, s2 is the string which will replace s1, and between them an arrow which defines the type of the formula. The single arrow (->) points that the formula is ordinary, the arrow with a dot (->.) represents a final formula. The difference between them is explained later.
+
+So, as you may have understood, MA is basically a bunch of formulae, like this:
+a11 [->|->.] a12
+a21 [->|->.] a22
+...
+an1 [->|->.] an2
+Here n is the number of formulae and the note [->|->.] means one of two mentioned above arrow types. Now, how all this works. First, MA is given an input string. Then, the formulae from the set are checked one by one in the order they were given for the following condition: is the string ai1 (the left part of the formula) the substring of the input string. If it isn't, this formula is skipped, and the next one is checked for the same condition. Otherwise (in this case the formula is applicable to the input string), the first occurence of ai1 in the input string is replaced by the string ai2 (the right part of the formula). Then, if the formula was ordinary, MA continues working from the first formula with the new input string, which it has just got by making the substitution. However, if the formula was final, MA stops, and the current string becomes the output string. If no formula is applicable to the input string, MA also stops and returns input string as an output.
+
+Now the example to make it more clear. Let's apply the following MA:
+1) b -> a
+2) a ->. aa
+to the input string "babaa".
+
+Step 1:
+Input string: babaa
+Applicable formula: 1)
+Output string: aabaa
+
+Step 2:
+Input string: aabaa
+Applicable formula: 1)
+Output string: aaaaa
+
+Step 3:
+Input string: aaaaa
+Applicable formula: 2)
+Output string: aaaaaa
+
+The second formula was final, so MA stops and the output is "aaaaaa". 
+
+We've provided some example programs for you. You can run them in debug mode and see MA in action for better understanding the process.
