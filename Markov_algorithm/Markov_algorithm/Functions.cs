@@ -128,7 +128,6 @@ namespace Markov_algorithm
             programGrid.ReadOnly = state;
         }
 
-<<<<<<< HEAD
         private void calculateRowsCount()
         {
             totalRowsCount = 0;
@@ -151,7 +150,7 @@ namespace Markov_algorithm
                     return 2;
             }
         }
-=======
+       
         private void debugProgram()
         {
             if (!debugModeOn)
@@ -222,6 +221,5 @@ namespace Markov_algorithm
                 programGrid.Rows[i].DefaultCellStyle.BackColor = Color.White;
             outputRichTextBox.SelectionColor = Color.Black;
         }
->>>>>>> ad26b91e77ca3114c2893203eea91639e4873a02
     }
 }
