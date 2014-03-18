@@ -144,14 +144,189 @@ namespace Markov_algorithm
             runProgram();
         }
 
+        private void writeToFile(StreamWriter ofs)
+        {
+            calculateRowsCount();
+            ofs.WriteLine(totalRowsCount);
+            for (int i = 0; i < totalRowsCount; i++)
+            {
+                ofs.Write(programGrid[1, i].Value + " ");
+                ofs.Write(arrowIndex(i) + " ");
+                ofs.Write(programGrid[3, i].Value + "\r\n");
+            }
+            ofs.WriteLine(statementTextBox.Text);
+        }
+
+        private void saveFile()
+        {
+            StreamWriter ofs = new StreamWriter(currentFileName);//(saveDialog.OpenFile());
+            try
+            {
+                writeToFile(ofs);
+            }
+            catch (IOException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                ofs.Close();
+            }
+        }
+
+        private void saveFileAs()
+        {
+            //if (compileProgram() == 0)
+            {
+                SaveFileDialog saveDialog = new SaveFileDialog();
+                saveDialog.Filter = "Markov algorithm programs (*.nam)|*.nam";
+                saveDialog.RestoreDirectory = true;
+                if (saveDialog.ShowDialog() == DialogResult.OK)
+                {
+                    StreamWriter ofs = new StreamWriter(saveDialog.OpenFile());
+                    try
+                    {
+                        writeToFile(ofs);
+                    }
+                    catch (IOException ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                    finally
+                    {
+                        ofs.Close();
+                    }
+                }
+                Text = Path.GetFileName(saveDialog.FileName);
+                currentFileName = saveDialog.FileName;
+            }
+        }
+
         private void saveButton_Click(object sender, EventArgs e)
         {
-            saveProgram();
+            if (currentFileName.Length == 0)
+                saveFileAs();
+            else
+                saveFile();
+            setGridModified(false);
+        }
+
+        private void openFile()
+        {
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Filter = "Markov algorithm programs (*.nam)|*.nam";
+            bool readingSuccessful = true;
+            uint commandsNum = 0;
+            string[,] commands = null;
+            string message = "Unknown error =(";
+            string fileName = null;
+            string problemStatement = "";
+            if (openDialog.ShowDialog() == DialogResult.OK)
+            {
+                fileName = openDialog.FileName;
+                try
+                {
+                    string text = File.ReadAllText(fileName);
+                    string[] lines = text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                    if (uint.TryParse(lines[0], out commandsNum))
+                    {
+                        if (lines.Length >= commandsNum)
+                        {
+                            commands = new string[commandsNum, 3];
+                            for (uint line = 0; line < commandsNum && readingSuccessful; ++line)
+                            {
+                                string[] parts = lines[line + 1].Split();
+                                if (parts.Length == 3)
+                                {
+                                    commands[line, 0] = parts[0];
+                                    commands[line, 2] = parts[2];
+                                    uint rowType;
+                                    if (uint.TryParse(parts[1], out rowType))
+                                    {
+                                        if (rowType == 1)
+                                            commands[line, 1] = ordinaryArrow;
+                                        else if (rowType == 2)
+                                            commands[line, 1] = finishArrow;
+                                        else
+                                        {
+                                            readingSuccessful = false;
+                                            message = string.Format("Failed to read the type of arrow in row {0};\nshould be either 1 or 2", line + 1);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        readingSuccessful = false;
+                                        message = string.Format("Failed to read the type of arrow in row {0};\nshould be either 1 or 2", line + 1);
+                                    }
+                                }
+                                else if (parts.Length == 2)
+                                {
+                                    // TODO
+                                }
+                                else if (parts.Length == 1)
+                                {
+                                    // TODO
+                                }
+                                else
+                                {
+                                    readingSuccessful = false;
+                                    message = string.Format("Failed to read command in row {0}", line + 1);
+                                }
+                            }
+                            if (readingSuccessful)
+                            {
+                                if (lines.Length > commandsNum + 1)
+                                {
+                                    problemStatement = lines[commandsNum + 1];
+                                }
+                            }
+                        }
+                        else
+                        {
+                            readingSuccessful = false;
+                            message = string.Format("Too few commands in the file (expected - {0})", commandsNum);
+                        }
+                    }
+                    else
+                    {
+                        readingSuccessful = false;
+                        message = "Failed to read the number of commands";
+                    }
+                }
+                catch (IOException ex)
+                {
+                    readingSuccessful = false;
+                    message = "Failed to open file";
+                }
+            }
+            //else
+            //{
+            //    readingSuccessful = false;
+            //    message = "Failed to open dialog";
+            //}
+            if (readingSuccessful)
+            {
+                programGrid.Rows.Clear();
+                for (int row = 0; row < commandsNum; ++row)
+                {
+                    addRow();
+                    for (int col = 1; col <= 3; ++col)
+                        programGrid[col, row].Value = commands[row, col - 1];
+                }
+                /*while (programGrid.RowCount < 5)
+                    addRow();*/
+                Text = Path.GetFileName(fileName);
+                currentFileName = fileName;
+                statementTextBox.Text = problemStatement;
+                setGridModified(false);
+            }
+            else
+                MessageBox.Show(message, "Parsing file failed", MessageBoxButtons.OK);
         }
 
         private void OpenButton_Click(object sender, EventArgs e)
         {
-            openProgram();
+            openFile();
         }
 
         private void debugButton_Click(object sender, EventArgs e)
@@ -166,12 +341,12 @@ namespace Markov_algorithm
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            //if (keyData == (Keys.Control | Keys.F5) && runButton.Enabled)
-            //    runProgram();
-            //else if (keyData == (Keys.Shift | Keys.F5) && StopButton.Enabled)
-            //    stopProgram();
-            //else if (keyData == (Keys.F5) && debugButton.Enabled)
-            //    debugProgram();
+            if (keyData == (Keys.Control | Keys.F5) && runButton.Enabled)
+                runProgram();
+            else if (keyData == (Keys.Shift | Keys.F5) && StopButton.Enabled)
+                stopProgram();
+            else if (keyData == (Keys.F5) && debugButton.Enabled)
+                debugProgram();
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
@@ -186,7 +361,12 @@ namespace Markov_algorithm
             {
                 var response = MessageBox.Show("Would you like to save changes?", "Warning", MessageBoxButtons.YesNo);
                 if (response == DialogResult.Yes)
-                    saveProgram();
+                {
+                    if (currentFileName.Length == 0)
+                        saveFileAs();
+                    else
+                        saveFile();
+                }
                 // TODO: handle somehow calcellation of saving a file
             }
         }
@@ -199,52 +379,6 @@ namespace Markov_algorithm
         private void statementTextBox_TextChanged(object sender, EventArgs e)
         {
             setGridModified(true);
-        }
-
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            openProgram();
-        }
-
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            saveProgram();
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void NewButton_Click(object sender, EventArgs e)
-        {
-            createNewProgram();
-        }
-
-        private void runToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            runProgram();
-        }
-
-        private void debugToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            debugProgram();
-        }
-
-        private void stopToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            stopProgram();
-        }
-
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            createNewProgram();
-        }
-
-        private void aboutMAToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            HelpForm helpForm = new HelpForm();
-            helpForm.Show();
         }
         
     }

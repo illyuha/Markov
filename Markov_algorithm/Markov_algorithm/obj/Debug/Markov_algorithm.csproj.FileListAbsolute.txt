@@ -25,4 +25,3 @@ D:\Mohyla\IV\Project Management\Project\Markov\Markov_algorithm\Markov_algorithm
 D:\Mohyla\IV\Project Management\Project\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.MarkovForm.resources
 D:\Mohyla\IV\Project Management\Project\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.Properties.Resources.resources
 D:\Mohyla\IV\Project Management\Project\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.csproj.GenerateResource.Cache
-D:\Mohyla\IV\Project Management\Project\Markov\Markov_algorithm\Markov_algorithm\obj\Debug\Markov_algorithm.HelpForm.resources
